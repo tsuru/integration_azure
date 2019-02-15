@@ -20,7 +20,7 @@ hosts:
           - "80,8080"
 components:
   install-dashboard: false
-  tsuru-image: cezarsa/tsuru_api:aks
+  tsuru-image: tsuru/api:$TSURUVERSION
   tsuru:
     config:
       kubernetes:

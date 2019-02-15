@@ -26,12 +26,12 @@ echo "Going to test tsuru image version: $TSURUVERSION"
 function abspath() { echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"; }
 mypath=$(abspath $(dirname ${BASH_SOURCE[0]}))
 finalconfigpath=$(mktemp)
-installname=$(openssl rand -hex 4)
+installname="int-$(openssl rand -hex 4)"
 cp ${mypath}/config.yml ${finalconfigpath}
 sed -i.bak "s,\$AZURE_CLIENT_ID,${AZURE_CLIENT_ID},g" ${finalconfigpath}
 sed -i.bak "s,\$AZURE_CLIENT_SECRET,${AZURE_CLIENT_SECRET},g" ${finalconfigpath}
 sed -i.bak "s,\$AZURE_SUBSCRIPTION_ID,${AZURE_SUBSCRIPTION_ID},g" ${finalconfigpath}
-sed -i.bak "s,\$INSTALLNAME,int-${installname},g" ${finalconfigpath}
+sed -i.bak "s,\$INSTALLNAME,${installname},g" ${finalconfigpath}
 sed -i.bak "s,\$TSURUVERSION,${TSURUVERSION},g" ${finalconfigpath}
 
 tmpdir=$(mktemp -d)
@@ -61,6 +61,7 @@ if [ -z $USE_LOCAL_TSURU ]; then
     popd
 fi
 
+export TSURU_INTEGRATION_installername="${installname}"
 export TSURU_INTEGRATION_examplesdir="${GOPATH}/src/github.com/tsuru/platforms/examples"
 export TSURU_INTEGRATION_installerconfig=${finalconfigpath}
 export TSURU_INTEGRATION_nodeopts="iaas=dockermachine"
