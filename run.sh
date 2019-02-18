@@ -21,6 +21,7 @@ function az_cleanup() {
     sudo apt-get update
     sudo apt-get install azure-cli -y
     az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
+    echo 'Cleaning up resource group...'
     az group delete -y --name docker-machine
 }
 
@@ -28,7 +29,8 @@ export AZURE_RESOURCE_GROUP='docker-machine'
 export AZURE_VIRTUAL_NETWORK='docker-machine-vnet'
 export AZURE_SUBNET='docker-machine'
 export AZURE_LOCATION="westus"
-export AZURE_AGENT_VM_SIZE="Standard_D2_v2"
+export AZURE_AGENT_VM_SIZE="Standard_D1_v2"
+export AZURE_INSTALL_VM_SIZE="Standard_A2_v2"
 export AZURE_AGENT_POOL_NAME="agentpool0"
 
 if which apt-get; then
@@ -52,7 +54,8 @@ sed -i.bak "s,\$AZURE_CLIENT_SECRET,${AZURE_CLIENT_SECRET},g" ${finalconfigpath}
 sed -i.bak "s,\$AZURE_SUBSCRIPTION_ID,${AZURE_SUBSCRIPTION_ID},g" ${finalconfigpath}
 sed -i.bak "s,\$INSTALLNAME,${installname},g" ${finalconfigpath}
 sed -i.bak "s,\$TSURUVERSION,${TSURUVERSION},g" ${finalconfigpath}
-sed -i.bak "s,\$AZURE_AGENT_VM_SIZE,${AZURE_AGENT_VM_SIZE},g" ${finalconfigpath}
+sed -i.bak "s,\$AZURE_INSTALL_VM_SIZE,${AZURE_INSTALL_VM_SIZE},g" ${finalconfigpath}
+sed -i.bak "s,\$AZURE_LOCATION,${AZURE_LOCATION},g" ${finalconfigpath}
 
 tmpdir=$(mktemp -d)
 ssh-keygen -t rsa -N '' -f ${tmpdir}/clusterid
@@ -85,7 +88,7 @@ export TSURU_INTEGRATION_installername="${installname}"
 export TSURU_INTEGRATION_examplesdir="${GOPATH}/src/github.com/tsuru/platforms/examples"
 export TSURU_INTEGRATION_installerconfig=${finalconfigpath}
 export TSURU_INTEGRATION_nodeopts="iaas=dockermachine"
-export TSURU_INTEGRATION_maxconcurrency=4
+export TSURU_INTEGRATION_maxconcurrency=2
 export TSURU_INTEGRATION_enabled=1
 export TSURU_INTEGRATION_clusters="aks"
 if [ -z $TSURU_INTEGRATION_verbose ]; then

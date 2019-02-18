@@ -8,7 +8,8 @@ driver:
     azure-client-id: "$AZURE_CLIENT_ID"
     azure-client-secret: "$AZURE_CLIENT_SECRET"
     azure-subscription-id: "$AZURE_SUBSCRIPTION_ID"
-    azure-size: "$AZURE_AGENT_VM_SIZE"
+    azure-size: "$AZURE_INSTALL_VM_SIZE"
+    azure-location: "$AZURE_LOCATION"
 hosts:
   apps:
     size: 0
