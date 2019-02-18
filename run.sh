@@ -94,6 +94,9 @@ export TSURU_INTEGRATION_clusters="aks"
 if [ -z $TSURU_INTEGRATION_verbose ]; then
   export TSURU_INTEGRATION_verbose=1
 fi
+if [ -z $TSURU_INTEGRATION_platforms ]; then
+  export TSURU_INTEGRATION_platforms="tsuru/python,tsuru/go,tsuru/static,tsuru/nodejs"
+fi
 
 go test -v -count 1 -timeout 120m github.com/tsuru/tsuru/integration
 
