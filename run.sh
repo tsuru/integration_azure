@@ -14,7 +14,7 @@ export AZURE_RESOURCE_GROUP='docker-machine'
 export AZURE_VIRTUAL_NETWORK='docker-machine-vnet'
 export AZURE_SUBNET='docker-machine'
 export AZURE_LOCATION="westus"
-export AZURE_AGENT_VM_SIZE="Standard_D1_v2"
+export AZURE_AGENT_VM_SIZE="Standard_A4_v2"
 export AZURE_AGENT_POOL_NAME="agentpool0"
 
 set -e
@@ -33,6 +33,7 @@ sed -i.bak "s,\$AZURE_CLIENT_SECRET,${AZURE_CLIENT_SECRET},g" ${finalconfigpath}
 sed -i.bak "s,\$AZURE_SUBSCRIPTION_ID,${AZURE_SUBSCRIPTION_ID},g" ${finalconfigpath}
 sed -i.bak "s,\$INSTALLNAME,${installname},g" ${finalconfigpath}
 sed -i.bak "s,\$TSURUVERSION,${TSURUVERSION},g" ${finalconfigpath}
+sed -i.bak "s,\$AZURE_AGENT_VM_SIZE,${AZURE_AGENT_VM_SIZE},g" ${finalconfigpath}
 
 tmpdir=$(mktemp -d)
 ssh-keygen -t rsa -N '' -f ${tmpdir}/clusterid
