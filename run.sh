@@ -31,7 +31,10 @@ export AZURE_LOCATION="westus"
 export AZURE_AGENT_VM_SIZE="Standard_D2_v2"
 export AZURE_AGENT_POOL_NAME="agentpool0"
 
-which apt-get && az_cleanup
+if which apt-get; then
+    az_cleanup
+    trap az_cleanup EXIT
+fi
 
 set -e
 
