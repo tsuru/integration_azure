@@ -28,7 +28,7 @@ export AZURE_RESOURCE_GROUP='docker-machine'
 export AZURE_VIRTUAL_NETWORK='docker-machine-vnet'
 export AZURE_SUBNET='docker-machine'
 export AZURE_LOCATION="westus"
-export AZURE_AGENT_VM_SIZE="Standard_D3_v2"
+export AZURE_AGENT_VM_SIZE="Standard_D2_v2"
 export AZURE_AGENT_POOL_NAME="agentpool0"
 
 which apt-get && az_cleanup
