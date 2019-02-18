@@ -22,7 +22,7 @@ function az_cleanup() {
     sudo apt-get install azure-cli -y
     az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
     echo 'Cleaning up resource group...'
-    az group delete -y --name docker-machine
+    az group delete -y --name docker-machine || true
 }
 
 export AZURE_RESOURCE_GROUP='docker-machine'
