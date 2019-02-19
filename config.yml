@@ -1,6 +1,6 @@
 name: "$INSTALLNAME"
-docker-storage-driver: overlay
-docker-install-url: https://raw.githubusercontent.com/rancher/install-docker/master/17.09.0.sh
+docker-storage-driver: aufs
+docker-install-url: https://raw.githubusercontent.com/rancher/install-docker/master/18.06.2.sh
 driver:
   name: azure
   private-ip-interface: eth0
