@@ -10,6 +10,7 @@ driver:
     azure-subscription-id: "$AZURE_SUBSCRIPTION_ID"
     azure-size: "$AZURE_INSTALL_VM_SIZE"
     azure-location: "$AZURE_LOCATION"
+    azure-image: "Canonical:UbuntuServer:18.04-LTS:latest"
 hosts:
   apps:
     size: 0
