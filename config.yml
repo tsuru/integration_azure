@@ -11,6 +11,7 @@ driver:
     azure-size: "$AZURE_INSTALL_VM_SIZE"
     azure-location: "$AZURE_LOCATION"
     azure-image: "Canonical:UbuntuServer:18.04-LTS:latest"
+    azure-custom-data: "$SCRIPT_DIR/userdata.sh"
 hosts:
   apps:
     size: 0
@@ -33,4 +34,6 @@ components:
       debug: true
       iaas:
         dockermachine:
+          user-data-file-param: azure-custom-data
+          user-data: https://raw.githubusercontent.com/tsuru/integration_azure/master/userdata.sh
           debug: true

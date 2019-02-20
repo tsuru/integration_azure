@@ -49,6 +49,7 @@ mypath=$(abspath $(dirname ${BASH_SOURCE[0]}))
 finalconfigpath=$(mktemp)
 installname="int-$(openssl rand -hex 4)"
 cp ${mypath}/config.yml ${finalconfigpath}
+sed -i.bak "s,\$SCRIPT_DIR,${mypath},g" ${finalconfigpath}
 sed -i.bak "s,\$AZURE_CLIENT_ID,${AZURE_CLIENT_ID},g" ${finalconfigpath}
 sed -i.bak "s,\$AZURE_CLIENT_SECRET,${AZURE_CLIENT_SECRET},g" ${finalconfigpath}
 sed -i.bak "s,\$AZURE_SUBSCRIPTION_ID,${AZURE_SUBSCRIPTION_ID},g" ${finalconfigpath}
