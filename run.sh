@@ -85,6 +85,7 @@ if [ -z $USE_LOCAL_TSURU ]; then
     popd
 fi
 
+export TSURU_INTEGRATION_COMMAND_TIMEOUT=1500
 export TSURU_INTEGRATION_installername="${installname}"
 export TSURU_INTEGRATION_examplesdir="${GOPATH}/src/github.com/tsuru/platforms/examples"
 export TSURU_INTEGRATION_installerconfig=${finalconfigpath}
